@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Intl API in JavaScript</title>
+</head>
+<body>
+<h1>Intl API in JavaScript - some examples</h1>
+<p>
+    Official documentation:
+    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl">
+        https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl
+    </a>
+</p>
+<p>See source code and Developer Tools Console for output</p>
+<script>
+
+    //*********************
+    // Relative Time Format, built in into current browsers!
+    //*********************
+    // English
+    let locale = 'en-US';
+    const rtf = new Intl.RelativeTimeFormat(locale, {numeric: 'auto'});
+    console.group('English');
+    console.log(rtf.format(-1, 'month')); // 'last month'
+    console.log(rtf.format(0, 'month')); // 'this month'
+    console.log(rtf.format(2, 'week')); // 'in 2 months'
+    console.log(rtf.format(-2, 'week')); // '2 months ago'
+    console.groupEnd();
+
+    // Dutch
+    locale = 'nl-NL';
+    const rtfNl = new Intl.RelativeTimeFormat(locale, {numeric: 'auto'});
+    console.group('Nederlands');
+    console.log(rtfNl.format(-1, 'month')); // 'vorige maand'
+    console.log(rtfNl.format(0, 'month')); // 'deze maand'
+    console.log(rtfNl.format(2, 'week')); // 'over twee maanden'
+    console.log(rtfNl.format(-2, 'week')); // '2 maanden geleden'
+    console.groupEnd();
+
+    // Francais
+    locale = 'fr-FR';
+    const rtfFr = new Intl.RelativeTimeFormat(locale, {numeric: 'auto'});
+    console.group('Francais');
+    console.log(rtfFr.format(-1, 'month')); // 'le mois dernier'
+    console.log(rtfFr.format(0, 'month')); // 'ce mois-ci'
+    console.log(rtfFr.format(2, 'week')); // 'dans 2 mois'
+    console.log(rtfFr.format(-2, 'week')); // 'il y a 2 mois'
+    console.groupEnd();
+
+    // Chinese - Hong Kong
+    locale = 'zh-hk';
+    const rtfZh = new Intl.RelativeTimeFormat(locale, {numeric: 'auto'});
+    console.group('Chinese-Hong Kong');
+    console.log(rtfZh.format(-1, 'month')); // '上個月'
+    console.log(rtfZh.format(0, 'month')); // '本月'
+    console.log(rtfZh.format(2, 'week')); // '2 星期後'
+    console.log(rtfZh.format(-2, 'week')); // '2 星期前'
+    console.groupEnd();
+
+    //*********************
+    // NumberFormat, Format a number as currency
+    //*********************
+    console.group('Currency');
+    console.log('US Dollars', new Intl.NumberFormat('en-US', {
+        currency:'USD',
+        style: 'currency',
+        maximumFractionDigits:2
+    }).format(1000)); // $1,000.00
+
+    console.log('Euros', new Intl.NumberFormat('nl-NL', {
+        currency:'EUR',
+        style: 'currency',
+        maximumFractionDigits:2
+    }).format(1000)); // € 1.000,00
+
+
+    console.log('Japanese Yen', new Intl.NumberFormat('nl-NL', {
+        currency:'JPY',
+        style: 'currency',
+        maximumFractionDigits:2
+    }).format(1000)); // JP¥ 1.000
+
+    console.groupEnd();
+
+
+</script>
+
+</body>
+</html>
